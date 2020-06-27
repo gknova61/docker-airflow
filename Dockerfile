@@ -76,11 +76,13 @@ RUN set -ex \
         /usr/share/man \
         /usr/share/doc \
         /usr/share/doc-base \
-    && pip3 install -r /opt/deploy/PyCharmProjects/requirements.txt \
-    && mkdir ~/dags \
+    && pip3 install selenium pandas finnhub-python google-cloud-core google-cloud-datastore google-cloud-firestore google-cloud-bigquery google-cloud-storage google-cloud-vision Cython lxml firebase-admin finviz xlrd \
+    && mkdir {AIRFLOW_USER_HOME}/dags \
+    && mkdir {AIRFLOW_USER_HOME}/sleek_data \
 
 COPY script/entrypoint.sh /entrypoint.sh
 COPY config/airflow.cfg ${AIRFLOW_USER_HOME}/airflow.cfg
+COPY script/chromedriver ${AIRFLOW_USER_HOME}/chromedriver
 
 RUN chown -R airflow: ${AIRFLOW_USER_HOME}
 
